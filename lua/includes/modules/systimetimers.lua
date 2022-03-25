@@ -211,3 +211,8 @@ local function systimetimers_doTimers()
 end
 
 hook.Add("Think", "_systimers_doTimers_", systimetimers_doTimers)
+
+concommand.Add("stt_dumptimers", function()
+	print("SysTimeTimers:\n")
+	PrintTable(systimetimers.GetQueue())
+end, nil, "Shows all the timers along with their information")
