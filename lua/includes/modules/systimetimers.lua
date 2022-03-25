@@ -169,7 +169,7 @@ function systimetimers.TimeLeft(timerName)
 	if not timerName then error("[SysTimeTimers] You didn't specify a timer name!") return end
 	if not systimetimers.Queue[timerName] then error(string.format("[SysTimeTimers] There is no timer named \"%s\"", tostring(timerName))) return end
 
-	local timeleft_ = (systimetimers.Queue[timerName]["LastRun"] + systimetimers.Queue["RunEvery"]) - SysTime()
+	local timeleft_ = (systimetimers.Queue[timerName]["LastRun"] + systimetimers.Queue[timerName]["RunEvery"]) - SysTime()
 	if systimetimers.Queue[timerName]["Paused"] == true then
 		timeleft_ = -timeleft_
 	end
