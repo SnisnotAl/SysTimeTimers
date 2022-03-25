@@ -29,7 +29,7 @@ function systimetimers.GetQueue()
 	return systimetimers.Queue or {}
 end
 
-function systimetimers.Create(timerName, timerDelay, timerRepeat, timerFunction)
+function systimetimers.Create(timerName, timerDelay, timerRepeat, timerFunction, pauseOnRun)
 	if not timerName then error("[SysTimeTimers] You didn't specify a timer name!") return end
 	if not timerDelay then error("[SysTimeTimers] You didn't specify a timer delay!") return end
 	if not timerRepeat then error("[SysTimeTimers] You didn't specify a timer repeat amount (0 = Infinite)!") return end
@@ -42,7 +42,7 @@ function systimetimers.Create(timerName, timerDelay, timerRepeat, timerFunction)
 		["LastRun"] = SysTime(),
 		["RunAmount"] = timerRepeat,
 		["RunAmountTotal"] = 0,
-		["Paused"] = false,
+		["Paused"] = pauseOnRun or false,
 		["Func"] = timerFunction
 	}
 
