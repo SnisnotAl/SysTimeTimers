@@ -22,7 +22,7 @@ AddCSLuaFile() -- ;(
 module("systimetimers", package.seeall)
 
 if SERVER then
-	CreateConVar("stt_ignore_hibernation_warning", 0, nil, "If set to 1, will not show a warning about hibernation on timer creation", 0, 1)
+	CreateConVar("stt_ignore_hibernation_warning", 0, bit.bor(FCVAR_ARCHIVE), "If set to 1, will not show a warning about hibernation on timer creation", 0, 1)
 end
 
 systimetimers.Queue = {
