@@ -21,6 +21,10 @@
 AddCSLuaFile() -- ;(
 module("systimetimers", package.seeall)
 
+if SERVER then
+	CreateConVar("stt_ignore_hibernation_warning", 0, nil, "If set to 1, will not show a warning about hibernation on timer creation", 0, 1)
+end
+
 systimetimers.Queue = {
 
 }
@@ -47,8 +51,8 @@ function systimetimers.Create(timerName, timerDelay, timerRepeat, timerFunction,
 	}
 
 	if SERVER then
-		if GetConVar_Internal("sv_hibernate_think"):GetString() ~= "1" then
-			ErrorNoHalt("[SysTimeTimers] Please ensure \"sv_hibernate_think\" is set to \"1\" as timers will not progress when the server is empty!")
+		if (GetConVar_Internal("stt_ignore_hibernation_warning"):GetString() ~= "1") and (GetConVar_Internal("sv_hibernate_think"):GetString() ~= "1") then
+			ErrorNoHalt("[SysTimeTimers - WARN] Please ensure \"sv_hibernate_think\" is set to \"1\" as timers will not progress when the server is empty, you can also use stt_ignore_hibernation_warning 0 to disable this warning!")
 		end
 	end
 end
